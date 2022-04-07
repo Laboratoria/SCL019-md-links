@@ -23,7 +23,8 @@ const kindOfRoute = (route) => {
       console.log('El archivo existe')
       checkExtension(route)
     } if (typeOfArchive.isDirectory()) {
-      console.log('El directorio existe')
+      console.log('El directorio existe y contiene los siguientes archivos md:')
+      directoryFiles(route).forEach(file => filterMdFiles(file)) 
     }
 }
 
@@ -35,6 +36,18 @@ if (path.extname(route) !== '.md') {
   console.log('El archivo es de tipo .md') 
 } 
 }
+
+const directoryFiles = (folderPath) => fs.readdirSync(folderPath)
+
+const filterMdFiles = file => {
+  const mdFile = path.extname(file)
+  if (mdFile == '.md') {
+    console.log(file)
+  }
+}
+
+
+ 
 
 module.exports.fileRoute = fileRoute;
 module.exports.verifyExistance = verifyExistance;

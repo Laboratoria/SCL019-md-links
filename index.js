@@ -1,6 +1,9 @@
 const fs = require('fs')
+//const { url } = require('inspector')
 const path = require('path')
 const { exit } = require('process')
+const readline = require('readline')
+const url = require('url')
 
 //console.log("Ingresa una ruta") 
 //process.stdout.write("Ingresa una ruta") Cuál es la diferencia?
@@ -46,10 +49,38 @@ const filterMdFiles = file => {
   }
 }
 
+const readFile = (fileName) => {
+  fs.readFile(fileName, 'utf8' , (err, data) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+    const urlRegExp = /[(https?):\/\/(www\.)?\w@:%.\+~#=]{2,256}\.[a-z]{2,6}\b([-\w@:%\+.~#?&//=]*)/gi
+    const links = data.match(urlRegExp);
+    console.log(links) 
+  })
+      
+    }
 
- 
+
+/*const readFile = (fileName) => {
+  const rl = readline.createInterface({
+    input: fs.createReadStream(fileName),
+    crlfDelay: Infinity
+  });
+  
+  rl.on('line', (line) => {
+    const urlRegExp = /[\((http(s)?):\/\/(www\.)?\w@:%.\+~#=]{2,256}\.[a-z]{2,6}\b([-\w@:%\+.~#?&//=]*)/
+    const links = line.match(urlRegExp)
+    if (links) {
+      links.forEach(link =>console.log(link));
+    } 
+    
+  });
+}*/
 
 module.exports.fileRoute = fileRoute;
 module.exports.verifyExistance = verifyExistance;
 module.exports.kindOfRoute = kindOfRoute;
 module.exports.checkExtension = checkExtension;
+module.exports.readFile = readFile;

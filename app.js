@@ -6,10 +6,11 @@ const readline = require('readline').createInterface({
 const index = require('./index')
 
 
-readline.question(`Ingresa una ruta:`, (route) => {
+readline.question(`Ingresa una ruta: `, (route) => {
   index.fileRoute(route)
   index.verifyExistance(route)
-  index.kindOfRoute(route) 
+  index.kindOfRoute(route)
+  index.readFile(route) 
 })
 
 

@@ -1,9 +1,12 @@
 const fs = require('fs')
 const path = require('path')
 const { exit } = require('process')
-const process = require('process')
-const url = require('url')
+//const process = require('process')
+//const url = require('url')
 const readline = require('readline')
+const colors = require('colors/safe');
+
+
 //console.log("Ingresa una ruta") 
 //process.stdout.write("Ingresa una ruta") Cuál es la diferencia?
 
@@ -14,7 +17,8 @@ const fileRoute = (route) => path.resolve(route)
 const verifyExistance = (route) => {
   const fileExist = fs.existsSync(route) 
   if (!fileExist) {
-    console.log('Esta ruta no existe')
+    console.log(colors.red(`Esta ruta no existe 😱`))
+    console.log(colors.bgMagenta(` Adiós 👋 `))
     exit()
   }}
 
@@ -23,10 +27,11 @@ const kindOfRoute = (route) => fs.statSync(route)
 
 const checkExtension = (route) => {
 if (path.extname(route) !== '.md') {
-  console.log('El archivo no es de tipo .md')
+  console.log(colors.red('El archivo no es de tipo .md, así no puedo trabajar 😒'))
+  console.log(colors.bgMagenta(` Adiós 👋 `))
   exit()
 }  else {
-  console.log('El archivo es de tipo .md y contiene los siguientes links:')
+  console.log(colors.yellow('El archivo es de tipo .md y contiene los siguientes links:'))
   readFile(route) 
 } 
 }
@@ -61,7 +66,7 @@ const readFile = (fileName) => {
     const urlRegExp = /(https?:\/\/)(www\.)?[-a-z0-9@:%._\+~#=]{1,256}\.[a-z0-9()]{1,6}\b([-a-z0-9()!@:%_\+.~#?&\/\/=]*)/gi
     const links = line.match(urlRegExp)
      if (links) {
-       linksArr.push(links)
+       console.log(links)
      }
     
   });

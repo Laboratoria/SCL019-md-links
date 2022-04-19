@@ -8,6 +8,8 @@ const index = require('./index')
 const prompt = require("prompt-sync")({ sigint: true });
 const colors = require('colors/safe');
 
+const linkArray = []
+
 readline.question(colors.blue(`Ingrese una ruta: `), (route) => {
   index.verifyExistance(route)
   
@@ -33,16 +35,17 @@ readline.question(colors.blue(`Ingrese una ruta: `), (route) => {
             console.log(mdFiles)
             const fileName = prompt(colors.blue('Por favor, ingrese el nombre del archivo que desea analizar: '));
             console.log(colors.yellow('El archivo contiene los siguientes links:'));
-            index.readFile(fileName);
+            return index.readFile(fileName);
+            }
+            //.then((file) => {file.forEach((url) => linkArray.push(url))
+              //console.log(linkArray)
+              //return linkArray //???
+            
            }
              
-      }
-    })
+      })
 
-//Verificar si la ruta ingresada existe en el sistema OK
-//Si existe, verificar si es un archivo o un directorio
-//Si es un archivo, verificar si es de tipo md
-//Si es md, leer el archivo y reconocer los links
+
 
 
 

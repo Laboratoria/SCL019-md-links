@@ -4,7 +4,7 @@ const { exit } = require('process')
 const readline = require('readline')
 const colors = require('colors/safe');
 const https = require('https');
-const url  = require('url');
+const url = require('url');
 
 
 //Se convierte la ruta a absoluta
@@ -51,8 +51,8 @@ const linkValidation = (link) => {
       port: 443, //canal del servidor, que escucha la petición, suele ocuparse el 80
       path: url.parse(link).pathname, //todo lo que está después del slash
     }
-      console.log(options)
-    
+    console.log(options)
+
     const req = https.request(options, response => {
       //console.log(response)
       const validSatus = {
@@ -61,9 +61,9 @@ const linkValidation = (link) => {
         status: response.statusCode <= 399,
       };
       resolve(validSatus);
-      
+
     })
-    
+
     req.on('error', error => {
       //console.error(error)
       const invalidStatus = {
@@ -72,9 +72,9 @@ const linkValidation = (link) => {
       };
       resolve(invalidStatus); //en promesas, resolve = return
     })
-    
+
     req.end()
-    
+
     //htttp request, se le dan 2 parametros, uno de ellos options, el otro es un callback de la función que revise el status
   })
 } //la promesa se consume usando then y catch en una función aparte, también se puede usar if u operador ternario
@@ -90,13 +90,9 @@ const readFile = (fileName) => {
     }
     const urlRegExp = /(https?:\/\/)(www\.)?[-a-z0-9@:%._\+~#=]{1,256}\.[a-z0-9()]{1,6}\b([-a-z0-9()!@:%_\+.~#?&\/\/=]*)/gi
     const links = data.match(urlRegExp);
-
-    //console.log(links)
-    //const urlPromise = linkValidation(links[0])
-    //console.log(urlPromise)
+    console.log(links)
 
     promiseArray = links.map((url) => linkValidation(url))
-
     console.log(promiseArray)
     return Promise.all(promiseArray)
 
@@ -118,7 +114,7 @@ const linkCounter = (array) => {
     console.log(colors.green('Links funcionales:', workingLinks));
     console.log(colors.red('Links rotos:', brokenLinks));
   });
-  
+
 }
 
 //Función que recorre el array de links y de acuerdo a sus status, nos entrega información acerca de cuáles están rotos y cuáles funcionan

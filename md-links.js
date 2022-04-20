@@ -35,17 +35,17 @@ const mdLinks = (route, options) => {
                 console.log(mdFiles)
                 const fileName = prompt(colors.blue('Por favor, ingrese el nombre del archivo que desea analizar: '));
                 console.log(colors.yellow('El archivo contiene los siguientes links:'));
-                index.readFile(fileName).then((response) => {
+                index.readFile(fileName).then((res) => {
                     if (options.stats) {
-                        index.linkCounter(response);
+                        index.linkCounter(res);
                     } 
                     if (options.validate) {
-                        index.statusData(response);
+                        index.statusData(res);
                     } else if (options.stats && options.validate) {
-                        index.linkCounter(response);
-                        index.statusData(response); 
+                        index.linkCounter(res);
+                        index.statusData(res); 
                     }
-                   resolve(response)
+                   resolve(res)
     
                 })
                 }

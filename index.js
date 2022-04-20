@@ -1,18 +1,11 @@
 const fs = require('fs')
 const path = require('path')
 const { exit } = require('process')
-//const process = require('process')
-//const url = require('url')
 const readline = require('readline')
 const colors = require('colors/safe');
-const fetch = require('node-fetch');
 const https = require('https');
 const url  = require('url');
 
-
-
-//console.log("Ingresa una ruta") 
-//process.stdout.write("Ingresa una ruta") Cuál es la diferencia?
 
 //Se convierte la ruta a absoluta
 const fileRoute = (route) => path.resolve(route)
@@ -27,9 +20,10 @@ const verifyExistance = (route) => {
   }
 }
 
-//Se identifica si la ruta ingresada es un archivo o un directorio  
+//Función que identifica si la ruta ingresada es un archivo o un directorio  
 const kindOfRoute = (route) => fs.statSync(route)
 
+//Función que chequea la extensión del archivo 
 const checkExtension = (route) => {
   if (path.extname(route) !== '.md') {
     console.log(colors.red('El archivo no es de tipo .md, así no puedo trabajar 😒'))
@@ -41,8 +35,10 @@ const checkExtension = (route) => {
   }
 }
 
+//Función que lee el contenido de un directorio
 const directoryFiles = (folderPath) => fs.readdirSync(folderPath)
 
+//Función que revisa la extensión de un archivo
 const filterMdFiles = (file) => path.extname(file)
 
 //Esta promesa lee los links y verifica su status
@@ -52,13 +48,13 @@ const linkValidation = (link) => {
     const options = {
       method: 'HEAD',
       hostname: url.parse(link).host, //ruta donde se envía la petición
-      port: 80, //canal del servidor, que escucha la petición, suele ocuparse el 80
+      port: 443, //canal del servidor, que escucha la petición, suele ocuparse el 80
       path: url.parse(link).pathname, //todo lo que está después del slash
     }
       console.log(options)
     
     const req = https.request(options, response => {
-      console.log(response)
+      //console.log(response)
       const validSatus = {
         linkname: link,
         Code: response.statusCode,
@@ -69,7 +65,7 @@ const linkValidation = (link) => {
     })
     
     req.on('error', error => {
-      console.error(error)
+      //console.error(error)
       const invalidStatus = {
         linkname: link,
         status: false,
@@ -85,7 +81,7 @@ const linkValidation = (link) => {
 
 
 
-
+//Función que lee el contenido del archivo md e identifica los links
 const readFile = (fileName) => {
   fs.readFile(fileName, 'utf8', (err, data) => {
     if (err) {
@@ -94,16 +90,46 @@ const readFile = (fileName) => {
     }
     const urlRegExp = /(https?:\/\/)(www\.)?[-a-z0-9@:%._\+~#=]{1,256}\.[a-z0-9()]{1,6}\b([-a-z0-9()!@:%_\+.~#?&\/\/=]*)/gi
     const links = data.match(urlRegExp);
-     console.log(links)
-    const urlPromise = linkValidation(links[0])
-    
-    urlPromise.then((urlStatus) => { //el parametro se refiere al valor que resuelve la promesa
-      console.log(urlStatus)
-      console.log('Promesa terminada')
-    })
-    return links
+
+    //console.log(links)
+    //const urlPromise = linkValidation(links[0])
+    //console.log(urlPromise)
+
+    promiseArray = links.map((url) => linkValidation(url))
+
+    console.log(promiseArray)
+    return Promise.all(promiseArray)
 
   })
+}
+
+//Función que cuenta los links funcionales y rotos y muestra los totales en consola
+const linkCounter = (array) => {
+  const workingLinks = 0;
+  const brokenLinks = 0;
+
+  array.forEach((element) => {
+    if (element.status) {
+      workingLinks += 1
+    } else {
+      brokenLinks += 1
+    }
+    console.log(colors.blue('Total de links:', array.length));
+    console.log(colors.green('Links funcionales:', workingLinks));
+    console.log(colors.red('Links rotos:', brokenLinks));
+  });
+  
+}
+
+//Función que recorre el array de links y de acuerdo a sus status, nos entrega información acerca de cuáles están rotos y cuáles funcionan
+const statusData = (array) => {
+  array.forEach((element) => {
+    if (element.status) {
+      console.log(colors.green(`Link: ${element.linkname} Status: ${element.status}`));
+    } else {
+      console.log(colors.red(`Link: ${element.linkname} Status: ${element.status}`));
+    }
+  });
 }
 
 
@@ -132,3 +158,5 @@ module.exports.readFile = readFile;
 module.exports.filterMdFiles = filterMdFiles;
 module.exports.directoryFiles = directoryFiles;
 module.exports.linkValidation = linkValidation;
+module.exports.linkCounter = linkCounter;
+module.exports.statusData = statusData;

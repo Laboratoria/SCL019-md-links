@@ -37,9 +37,6 @@ readline.question(colors.blue(`Ingrese una ruta: `), (route) => {
             console.log(colors.yellow('El archivo contiene los siguientes links:'));
             return index.readFile(fileName);
             }
-            //.then((file) => {file.forEach((url) => linkArray.push(url))
-              //console.log(linkArray)
-              //return linkArray //???
             
            }
              

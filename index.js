@@ -30,8 +30,7 @@ const checkExtension = (route) => {
     console.log(colors.bgMagenta(` Adiós 👋 `))
     exit()
   } else {
-    console.log(colors.yellow('El archivo es de tipo .md y contiene los siguientes links:'))
-    readFile(route)
+    console.log(colors.yellow('El archivo es de tipo .md, comenzaré el análisis...'))
   }
 }
 
@@ -77,73 +76,57 @@ const linkValidation = (link) => {
 
     //htttp request, se le dan 2 parametros, uno de ellos options, el otro es un callback de la función que revise el status
   })
-} //la promesa se consume usando then y catch en una función aparte, también se puede usar if u operador ternario
+} 
 
 
 
 //Función que lee el contenido del archivo md e identifica los links
 const readFile = (fileName) => {
-  fs.readFile(fileName, 'utf8', (err, data) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    const urlRegExp = /(https?:\/\/)(www\.)?[-a-z0-9@:%._\+~#=]{1,256}\.[a-z0-9()]{1,6}\b([-a-z0-9()!@:%_\+.~#?&\/\/=]*)/gi
-    const links = data.match(urlRegExp);
-    console.log(links)
+  return new Promise ((resolve, reject) => {
+    fs.readFile(fileName, 'utf8', (err, data) => {
+      if (err) {
+        console.error(err)
+        reject(err)
+      }
 
-    promiseArray = links.map((url) => linkValidation(url))
-    console.log(promiseArray)
-    return Promise.all(promiseArray)
+      const urlRegExp = /(https?:\/\/)(www\.)?[-a-z0-9@:%._\+~#=]{1,256}\.[a-z0-9()]{1,6}\b([-a-z0-9()!@:%_\+.~#?&\/\/=]*)/gi
+      const links = data.match(urlRegExp);
+      
+      resolve(links)
 
+    })
   })
+  
 }
 
 //Función que cuenta los links funcionales y rotos y muestra los totales en consola
 const linkCounter = (array) => {
-  const workingLinks = 0;
-  const brokenLinks = 0;
+  let workingLinks = 0;
+  let brokenLinks = 0;
 
   array.forEach((element) => {
     if (element.status) {
       workingLinks += 1
     } else {
       brokenLinks += 1
-    }
-    console.log(colors.blue('Total de links:', array.length));
-    console.log(colors.green('Links funcionales:', workingLinks));
-    console.log(colors.red('Links rotos:', brokenLinks));
+    }  
   });
-
+  console.log(colors.blue('Total de links:', array.length));
+  console.log(colors.green('Links funcionales:', workingLinks));
+  console.log(colors.red('Links rotos:', brokenLinks));
 }
 
 //Función que recorre el array de links y de acuerdo a sus status, nos entrega información acerca de cuáles están rotos y cuáles funcionan
 const statusData = (array) => {
+  console.log(colors.yellow('Los links funcionales se muestran en verde y los rotos en rojo:'))
   array.forEach((element) => {
     if (element.status) {
-      console.log(colors.green(`Link: ${element.linkname} Status: ${element.status}`));
+      console.log(colors.green(`Link: ${element.linkname} Status: OK`));
     } else {
-      console.log(colors.red(`Link: ${element.linkname} Status: ${element.status}`));
+      console.log(colors.red(`Link: ${element.linkname} Status: FAIL`));
     }
   });
 }
-
-
-
-/*const readFile = (fileName) => {
-  const rl = readline.createInterface({
-    input: fs.createReadStream(fileName),
-    crlfDelay: Infinity
-  });
-  rl.on('line', (line) => { 
-    const urlRegExp = /(https?:\/\/)(www\.)?[-a-z0-9@:%._\+~#=]{1,256}\.[a-z0-9()]{1,6}\b([-a-z0-9()!@:%_\+.~#?&\/\/=]*)/gi
-    const links = line.match(urlRegExp)
-     if (links) {
-       console.log(links)
-     }
-    
-  });
-}*/
 
 
 module.exports.fileRoute = fileRoute;

@@ -2,6 +2,7 @@ const { mdLinks } = require('./md-links')
 
 //Se almacenan los inputs de le usuarie en la terminal/consola en un array de argumentos
 const arguments = process.argv;
+//console.log(arguments);
 
 //Se crea el objeto de options que será definido por los argumentos
 const options = {};
@@ -27,6 +28,6 @@ if (arguments[0] === 'md-links') {
 mdLinks(route, options).then(() => {
     console.log();
 }).catch((error) => {
-    console.log(error.message);
+    console.trace(error);
 })
 

@@ -1,7 +1,7 @@
+const colors = require('colors/safe');
 const app = require('./app.js');
 const path = require('path');
 const { exit } = require('process')
-
 let fs = require('fs');
 
 
@@ -32,7 +32,8 @@ readline.question('Ingresa la ruta: ', route => { // input que solicita al usuar
         const extension = app.extension(route);
         if (extension == '.md'){
             console.log('Es un archivo .md');
-            app.readFile(route);
+            const urlValidate = app.readFile(route);
+          
         } else{
             console.log('No es un archivo .md');
             exit();
@@ -49,6 +50,7 @@ readline.question('Ingresa la ruta: ', route => { // input que solicita al usuar
                 arrayMd.push(files);
             } 
         });
+
         
         if (arrayMd == ''){
             console.log('Este directorio no contiene archivos .md');
@@ -65,3 +67,4 @@ readline.question('Ingresa la ruta: ', route => { // input que solicita al usuar
     readline.close();
   });
 
+  

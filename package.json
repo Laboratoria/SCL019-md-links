@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/DanielaAlcalaDaboin/SCL019-md-links#readme",
   "dependencies": {
+    "colors": "^1.4.0",
     "semver": "^7.3.7"
   }
 }

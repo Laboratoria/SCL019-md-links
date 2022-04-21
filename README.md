@@ -29,6 +29,19 @@ mdlink ./some/example.md --stats --validate
 
 Si falta alguno de los datos, recibirás un mensaje de aviso y tendrás que iniciar la aplicación nuevamente, ingresando lo que faltaba.
 
+### Un correcto uso se ve así:
+<img width="515" alt="package json - SCL019-md-links - Visual Studio Code 21-04-2022 9_01_30" src="https://user-images.githubusercontent.com/95220695/164466333-db3b0cc7-e0c7-401b-9b36-ce7192da698b.png">
+
+<img width="526" alt="package json - SCL019-md-links - Visual Studio Code 21-04-2022 9_02_13" src="https://user-images.githubusercontent.com/95220695/164466387-9c3310c9-39a4-45ca-929a-db310a3c27b1.png">
+
+<img width="526" alt="package json - SCL019-md-links - Visual Studio Code 21-04-2022 9_00_19" src="https://user-images.githubusercontent.com/95220695/164466422-8010e03d-13f5-41c4-8d1c-8fe1482832a3.png">
+
+
+
+
+
+
+
 
 
 

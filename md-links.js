@@ -36,7 +36,7 @@ const mdLinks = (route, options) => {
                     }
                     resolve(res)
 
-                })
+                }).then((res) => console.log(colors.bgMagenta(' ✨ ¡Espero haber sido de ayuda! Adiós ✨ ')))
         }
         if (typeOfArchive.isDirectory()) {
             index.directoryFiles(route).forEach(file => {
@@ -53,7 +53,7 @@ const mdLinks = (route, options) => {
                 console.log(colors.yellow('😃 El directorio existe y contiene los siguientes archivos md:'))
                 console.log(mdFiles)
                 const fileName = prompt(colors.blue('Por favor, ingrese el nombre del archivo que desea analizar: '));
-                console.log(colors.yellow('Estoy analizando el archivo...'));
+                console.log(colors.yellow('Estoy analizando el archivo, esto puede demorar un poco ⌛ \n'));
                 index.readFile(fileName)
                 .then((links) => {
                     promiseArray = links.map((url) => index.linkValidation(url))
@@ -66,16 +66,17 @@ const mdLinks = (route, options) => {
                         }
                         if (options.validate) {
                             index.statusData(res);
-                        } else if (options.stats && options.validate) {
+                        } 
+                        if (options.stats && options.validate) {
                             index.linkCounter(res);
                             index.statusData(res);
-                        }
+                        } 
                         resolve(res)
+                        
 
-                    })
+                    }).then((res) => console.log(colors.bgMagenta('\n ✨ ¡Espero haber sido de ayuda! Adiós ✨ \n')))
             }
         }
-
     })
 };
 

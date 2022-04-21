@@ -1,5 +1,8 @@
 const { mdLinks } = require('./md-links')
+const colors = require('colors/safe')
+const { exit } = require('process')
 
+console.log(colors.bgMagenta('\n¡Hola! Veamos qué tenemos aquí 🔍\n'))
 //Se almacenan los inputs de le usuarie en la terminal/consola en un array de argumentos
 const arguments = process.argv;
 //console.log(arguments);
@@ -23,6 +26,12 @@ if (arguments[0] === 'md-links') {
     route = arguments[1];
 } else {
     route = arguments[2];
+}
+
+if (!options.stats && !options.validate || route == '') {
+    console.log(colors.red(`Me falta información para continuar, por favor vuelva a iniciar la aplicación y asegúrese de seguir este ejemplo:`))
+    console.log(colors.bgBlack.bold('node cli nombre-de-archivo-o-directorio --stats y/o --validate \n'))
+    exit()
 }
 
 mdLinks(route, options).then(() => {

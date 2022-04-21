@@ -14,7 +14,7 @@ const fileRoute = (route) => path.resolve(route)
 const verifyExistance = (route) => {
   const fileExist = fs.existsSync(route)
   if (!fileExist) {
-    console.log(colors.red(`Esta ruta no existe 😱`))
+    console.log(colors.red(`Esta ruta no existe 😱 \n`))
     console.log(colors.bgMagenta(` Adiós 👋 `))
     exit()
   }
@@ -26,11 +26,11 @@ const kindOfRoute = (route) => fs.statSync(route)
 //Función que chequea la extensión del archivo 
 const checkExtension = (route) => {
   if (path.extname(route) !== '.md') {
-    console.log(colors.red('El archivo no es de tipo .md, así no puedo trabajar 😒'))
+    console.log(colors.red('El archivo no es de tipo .md, así no puedo trabajar 😒 \n'))
     console.log(colors.bgMagenta(` Adiós 👋 `))
     exit()
   } else {
-    console.log(colors.yellow('El archivo es de tipo .md, comenzaré el análisis...'))
+    console.log(colors.yellow('El archivo es de tipo .md, comenzaré el análisis, esto puede demorar un poco ⌛ \n'))
   }
 }
 
@@ -50,7 +50,7 @@ const linkValidation = (link) => {
       port: 443, //canal del servidor, que escucha la petición, suele ocuparse el 80
       path: url.parse(link).pathname, //todo lo que está después del slash
     }
-    console.log(options)
+    //console.log(options)
 
     const req = https.request(options, response => {
       //console.log(response)
@@ -67,7 +67,7 @@ const linkValidation = (link) => {
       //console.error(error)
       const invalidStatus = {
         linkname: link,
-        status: false,
+        status: error.statusCode >= 400,
       };
       resolve(invalidStatus); //en promesas, resolve = return
     })
@@ -105,7 +105,7 @@ const linkCounter = (array) => {
   let brokenLinks = 0;
 
   array.forEach((element) => {
-    if (element.status) {
+    if (element.status <= 399) {
       workingLinks += 1
     } else {
       brokenLinks += 1
@@ -118,9 +118,9 @@ const linkCounter = (array) => {
 
 //Función que recorre el array de links y de acuerdo a sus status, nos entrega información acerca de cuáles están rotos y cuáles funcionan
 const statusData = (array) => {
-  console.log(colors.yellow('Los links funcionales se muestran en verde y los rotos en rojo:'))
+  console.log(colors.blue('Los links funcionales se muestran en verde y los rotos en rojo:'))
   array.forEach((element) => {
-    if (element.status) {
+    if (element.status <= 399) {
       console.log(colors.green(`Link: ${element.linkname} Status: OK`));
     } else {
       console.log(colors.red(`Link: ${element.linkname} Status: FAIL`));

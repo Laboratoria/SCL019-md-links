@@ -7,7 +7,6 @@
   "dependencies": {
     "colors": "^1.4.0",
     "md-links-munita": "^0.1.0",
-    "node-fetch": "^2.6.7",
     "prompt-sync": "^4.2.0"
   },
   "devDependencies": {

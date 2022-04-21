@@ -27,7 +27,7 @@ const mdLinks = (route, options) => {
                 .then((res) => {
                     if (options.stats) {
                         index.linkCounter(res);
-                    }
+                    } 
                     if (options.validate) {
                         index.statusData(res);
                     } else if (options.stats && options.validate) {
@@ -66,8 +66,7 @@ const mdLinks = (route, options) => {
                         }
                         if (options.validate) {
                             index.statusData(res);
-                        } 
-                        if (options.stats && options.validate) {
+                        } else if (options.stats && options.validate) {
                             index.linkCounter(res);
                             index.statusData(res);
                         } 

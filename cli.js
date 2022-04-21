@@ -31,7 +31,7 @@ if (arguments[0] === 'md-links') {
 
 if (!options.stats && !options.validate || route == '') {
     console.log(colors.red(`Me falta información para continuar, por favor vuelva a iniciar la aplicación y asegúrese de seguir este ejemplo:`))
-    console.log(colors.bgBlack.bold('node cli nombre-de-archivo-o-directorio --stats y/o --validate \n'))
+    console.log(colors.bgBlack.bold('mdlink nombre-de-archivo-o-directorio --stats y/o --validate \n'))
     exit()
 }
 

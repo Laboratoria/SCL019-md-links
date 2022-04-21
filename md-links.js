@@ -1,12 +1,12 @@
 const index = require('./index.js');
 const colors = require('colors/safe');
 const prompt = require("prompt-sync")({ sigint: true });
+const { exit } = require('process')
 
 const mdLinks = (route, options) => {
 
     return new Promise((resolve) => {
 
-        const linksArray = [];
         //Se verifica la existencia de la ruta
         index.verifyExistance(route)
 
@@ -46,7 +46,7 @@ const mdLinks = (route, options) => {
                 }
             });
             if (mdFiles == '') {
-                console.log(colors.red('Este directorio no contiene archivos md, no tengo nada que hacer aquí 😔'))
+            console.log(colors.red('Este directorio no contiene archivos md, no tengo nada que hacer aquí 😔\n'))
                 console.log(colors.bgMagenta(` Adiós 👋 `))
                 exit()
             } else {

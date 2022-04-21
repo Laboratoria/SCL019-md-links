@@ -11,7 +11,8 @@ const colors = require('colors/safe');
 const linkArray = []
 
 readline.question(colors.blue(`Ingrese una ruta: `), (route) => {
-  index.verifyExistance(route)
+  console.log(index.fileRoute(route))
+  console.log(index.verifyExistance(route))
   
   const typeOfArchive = index.kindOfRoute(route);
   const mdFiles = [];  

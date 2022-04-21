@@ -1,12 +1,37 @@
 {
-  "name": "md-links",
+  "name": "md-links-munita",
   "version": "0.1.0",
   "engines": {
     "node": ">=14.x"
   },
   "dependencies": {
     "colors": "^1.4.0",
+    "md-links-munita": "^0.1.0",
     "node-fetch": "^2.6.7",
     "prompt-sync": "^4.2.0"
-  }
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "description": "Aplicación que analiza los links contenidos en archivos MD, reconociendo cuáles están funcionales y cuáles no y dando stats básicas.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JavieraMunita/SCL019-md-links.git"
+  },
+  "author": "Javiera Munita",
+  "license": "ISC",
+  "bin": {
+    "mdlink": "./cli.js"
+  },
+  "bugs": {
+    "url": "https://github.com/JavieraMunita/SCL019-md-links/issues"
+  },
+  "homepage": "https://github.com/JavieraMunita/SCL019-md-links#readme"
 }

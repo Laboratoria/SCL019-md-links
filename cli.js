@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const { mdLinks } = require('./md-links')
 const colors = require('colors/safe')
 const { exit } = require('process')

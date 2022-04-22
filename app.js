@@ -33,32 +33,34 @@ const extension = (ruta) => {
     return true;
 } else{
     console.log('No es un archivo .md');
-    
     exit();
 }
 }
-//--- Leer archivos 
+//--- Leer archivos //// ok!
 
-const readFile = (ruta) => fs.readFile(ruta, 'utf8', (err, route) => {
-  let arrayUrl = [];
-  if (err) {
-    console.error(err);
-    return
-  } else {
-    const expresionRegular = /(https?:\/\/)(www\.)?[-a-z0-9@:%._\+~#=]{1,256}\.[a-z0-9()]{1,6}\b([-a-z0-9()!@:%_\+.~#?&\/\/=]*)/gi;
-     arrayUrl = route.match(expresionRegular);
-
-    console.log('hola url',arrayUrl);
-
-    // const urlPromesa = validateLinks(arrayUrl);
-
-    // urlPromesa.then((linkStatus) => {
-    //   console.log(linkStatus);
-      // validate(url);
-      // }) 
-      return arrayUrl;
-    }
-});
+const readFile = (ruta) => {
+  return new Promise ((resolve, reject) => {
+    fs.readFile(ruta, 'utf8', (err, route) => {
+      if (err) {
+        console.error(err)
+        reject(err)
+      }
+      const expresionRegular = /(https?:\/\/)(www\.)?[-a-z0-9@:%._\+~#=]{1,256}\.[a-z0-9()]{1,6}\b([-a-z0-9()!@:%_\+.~#?&\/\/=]*)/gi;
+      const arrayUrl = route.match(expresionRegular);
+      
+      // console.log('hola url',arrayUrl);
+      
+      // const urlPromesa = validateLinks(arrayUrl);
+      
+      // urlPromesa.then((linkStatus) => {
+        //   console.log(linkStatus);
+        // validate(url);
+        // }) 
+        resolve(arrayUrl);
+      
+    })
+  })
+}
 
 //--- Leer archivos dentro del directorio
 const readDirectory = (ruta) => fs.readdirSync(ruta);

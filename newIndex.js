@@ -14,14 +14,17 @@ const mdLinks = (path, options) => {
                 console.log('2do if');
                 const archiDirectory = app.archiDirectory(path);
 
-                if (archiDirectory.isFile()) {
+                if (archiDirectory.isFile(path)) {
                     console.log('Es archivo', archiDirectory.isFile());
 
                     if (app.extension(path)) {
                         console.log('4to if');
 
-                         const arrayLink = app.readFile(path);
-                         console.log('Hola arrayLink', arrayLink);
+                          app.readFile(path)
+                         .then((arrayLink)=> {
+
+                             console.log('Hola arrayLink', arrayLink);
+                         })
                     
                             // console.log('readFile', readFile);
                             // const promiseArr = arrayLink.map((url) => app.validateLinks(url).then((status) => {

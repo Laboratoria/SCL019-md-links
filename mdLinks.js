@@ -1,6 +1,7 @@
 const { mdLinks } = require('./newIndex.js');
 const argv = process.argv;
 
+
 const options = {}; // es un objeto
 let path = '';
 
@@ -21,7 +22,7 @@ if (argv[0] === 'mdLinks') {
 mdLinks(path, options)
     .then(() => {
         console.log('hola');
-})
+    })
     .catch((err) => {
-    console.log('ERRORRRRR',err.message);
-});
+        console.log('ERRORRRRR', err.message);
+    });

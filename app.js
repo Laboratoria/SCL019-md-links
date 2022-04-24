@@ -14,11 +14,11 @@ const routeExist = (ruta) => fs.existsSync(ruta);
 const pathAbsolute = (ruta) => {
   const absolute = path.isAbsolute(ruta);
   if (absolute) {
-    console.log(`la ruta es absoluta`);
+    // console.log(`la ruta es absoluta`);
     return absolute;
   } else {
-    console.log(`La ruta es relativa, será convertida en absoluta.`);
-    console.log(path.resolve(ruta));
+    // console.log(`La ruta es relativa, será convertida en absoluta.`);
+    // console.log(path.resolve(ruta));
     return path.resolve(ruta);
   }
 }
@@ -66,7 +66,6 @@ const readFile = (ruta) => {
 //Esta funcion permite validar el status del link ///ok!
 function validateLinks(link) {
   return new Promise((resolve) => {
-
     const options = {
       method: 'HEAD',
       host: url.parse(link).host,
@@ -75,7 +74,7 @@ function validateLinks(link) {
     };
     // console.log('validate link - options', options);
     const req = https.request(options, (res) => {
-      // console.log(res);
+      // console.log('hola res',res);
       const nuevaData = {
         linkname: link,
         host: options.host,
@@ -113,9 +112,9 @@ const counterLink = (array) => {
       linkNotOk += 1;
     }
   });
-  console.log('Total de links', array.length);
-  console.log(colors.green('Links OK:'), colors.white(`${linkOk}`));
-  console.log(colors.red('Links FAIL:'), colors.white(`${linkNotOk}`));
+  console.log('▸Total de links: ', array.length);
+  console.log(colors.green('▸Links OK ✅:'), colors.white(`${linkOk}`));
+  console.log(colors.red('▸Links FAIL ❌:'), colors.white(`${linkNotOk}`));
 };
 
 const statusLink = (array) => {

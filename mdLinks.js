@@ -1,4 +1,4 @@
-const { mdLinks } = require('./newIndex.js');
+const { mdLinks } = require('./index.js');
 const argv = process.argv;
 
 
@@ -21,8 +21,7 @@ if (argv[0] === 'mdLinks') {
 
 mdLinks(path, options)
     .then(() => {
-        console.log('hola');
     })
     .catch((err) => {
-        console.log('ERRORRRRR', err.message);
+        console.log('ERROR', err.message);
     });

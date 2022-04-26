@@ -12,12 +12,14 @@ const {stats,
     validate, linksStatus} = require('./validate_stats')
 
 
-//creo el input para que ingrese la ruta el usuario..se crea la interfaz
-const rl= readline.createInterface(process.stdin,process.stdout)
-//funcion callback route, que es respuesta a pregunta
-rl.question((colors.red('BIENVENIDOS \nIngresa tu ruta:\n')), (route)=>{
-            readMdlinks(route)
-    })
+// //creo el input para que ingrese la ruta el usuario..se crea la interfaz
+// const rl= readline.createInterface(process.stdin,process.stdout)
+// //funcion callback ruta, que es respuesta a pregunta
+// rl.question((colors.red('BIENVENIDOS \nIngresa tu ruta:\n')), (ruta)=>{
+//     //se almacena en un variable
+//         let route =`${ruta}`;
+//         readMdlinks(route)
+//     })
 
 
 //creo una funcion con promesa
@@ -28,10 +30,10 @@ const readMdlinks =(route,opt) =>{
         let newArray =[];
 //si la ruta existe
     if (inicio.verifyExistence(route)&& inicio.verifyExtension(route)) {
-        process.stdout.write(colors.blue('Tu ruta Existe! \n'));
+        //process.stdout.write(colors.blue('Tu ruta Existe! \n'));
         //si la ruta absoluta no es absoluta, la transformas a absoluta,
-        inicio.pathAbsolute(route) === false ? route = path.resolve(route) : route;
-        process.stdout.write(colors.magenta('Tu ruta absoluta es: \n'+ route + '\n'));
+        //inicio.pathAbsolute(route) === false ? route = path.resolve(route) : route;
+        //process.stdout.write(colors.magenta('Tu ruta absoluta es: \n'+ route + '\n'));
     // si es un archivo
      }
     else if(!inicio.verifyExtension(route) ){
@@ -50,8 +52,9 @@ const readMdlinks =(route,opt) =>{
     const data ={
     href: ref,
     file: route,
-        }
-   //console.log('olaaaa' + data)
+    
+    }
+   // console.log('olaaaa' + data)
     //los coloco en el array que declare vacio
     newArray.push(data)
    
@@ -70,20 +73,20 @@ return newArray
 }) 
 .then((result) =>{
 //.then((result) =>{
-   //if(opt.validate && opt.stats){
+   if(opt.validate && opt.stats){
       // options(result);
       validate(result);
       stats(result);
-   //}else{
-     //if(opt.validate) {
-      // validate(result);  
+   }else{
+     if(opt.validate) {
+       validate(result);  
        //console.log(route)
-   // }
-      //if(opt.stats) {
-      // stats(result);
+    }
+      if(opt.stats) {
+       stats(result);
        
-      // }
-  // }
+       }
+   }
    resolve(result)
     //resolve(option);
 })
@@ -110,22 +113,3 @@ module.exports = {
     
 }
 
-
-
-
-
-
-
-
-
-
-
-// module.exports = () => {
-//   // ...
-// };
-// modulo para ver la ruta
-// const path = require('path')
-// console.log(__dirname);
-// console.log(__filename);
-// console.log(path.basename(__filename));
-// let fs = require('fs');

@@ -16,14 +16,13 @@ const mdLinks = (path, options) => {
                 const archiDirectory = app.archiDirectory(path);
 
                 if (archiDirectory.isFile(path)) {
-                    console.log('aqui no');
                     // console.log('Es archivo', archiDirectory.isFile());
                     if (app.extension(path)) {
                         app.readFile(path)
                             .then((arrayLink) => {
-                                console.log('esto es ',path);
+                                // console.log('esto es ',path);
                                 const promiseArray = arrayLink.map(element => app.validateLinks(element));
-                                console.log('Hola Link', promiseArray);
+                                // console.log('Hola Link', promiseArray);
                                 return Promise.all(promiseArray);
                             })
                             .then((element) => {

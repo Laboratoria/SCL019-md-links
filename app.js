@@ -14,11 +14,12 @@ const routeExist = (ruta) => fs.existsSync(ruta);
 const pathAbsolute = (ruta) => {
   const absolute = path.isAbsolute(ruta);
   if (absolute) {
+    console.log('absoluteeeeeeeeeeeeeeeeeeeeee',absolute);
     // console.log(`la ruta es absoluta`);
     return absolute;
   } else {
     // console.log(`La ruta es relativa, será convertida en absoluta.`);
-    // console.log(path.resolve(ruta));
+     console.log(path.resolve(ruta));
     return path.resolve(ruta);
   }
 }
@@ -26,17 +27,17 @@ const pathAbsolute = (ruta) => {
 //------- Verificar que es archivo o directorio //// ok!
 const archiDirectory = (ruta) => fs.statSync(ruta);
 
-
 //--- Saber la extensión del archivo /// ok!
 const extension = (ruta) => {
   const extRut = path.extname(ruta);
+  console.log('casa',ruta);
   if (extRut === '.md') {
     console.log('Es un archivo .md');
     // const urlValidate = app.readFile(path);
     return true;
   } else {
     console.log(colors.red('No es un archivo Mardown'));
-    exit();
+    return false;
   }
 }
 //--- Leer archivos dentro del directorio 

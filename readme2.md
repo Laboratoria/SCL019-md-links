@@ -1,3 +1,3 @@
 https://www.google.cl/
 https://miro.com/app/board/uXjVO_xeano=/
-https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175)

@@ -65,7 +65,6 @@ const mdLinks = (path, options) => {
                         app.readFile(optionPath)
                             .then((arrayLink) => {
                                  promiseArrayFolder = arrayLink.map(element => app.validateLinks(element));
-                                //  console.log('Hola promiseArrayFolder', promiseArrayFolder);
                                  return Promise.all(promiseArrayFolder);
 
                             })

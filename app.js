@@ -14,12 +14,11 @@ const routeExist = (ruta) => fs.existsSync(ruta);
 const pathAbsolute = (ruta) => {
   const absolute = path.isAbsolute(ruta);
   if (absolute) {
-    console.log('absoluteeeeeeeeeeeeeeeeeeeeee',absolute);
     // console.log(`la ruta es absoluta`);
     return absolute;
   } else {
     // console.log(`La ruta es relativa, será convertida en absoluta.`);
-     console.log(path.resolve(ruta));
+    //  console.log(path.resolve(ruta));
     return path.resolve(ruta);
   }
 }
@@ -30,10 +29,9 @@ const archiDirectory = (ruta) => fs.statSync(ruta);
 //--- Saber la extensión del archivo /// ok!
 const extension = (ruta) => {
   const extRut = path.extname(ruta);
-  console.log('casa',ruta);
   if (extRut === '.md') {
-    console.log('Es un archivo .md');
-    // const urlValidate = app.readFile(path);
+    console.log(colors.bold('El archivo ingredado tienes extensión .md'));
+    console.log(colors.bold('Los links funcionales se identifican con el color', colors.green('verde'),'y en', colors.red('rojo'), 'los rotos:\n'));
     return true;
   } else {
     console.log(colors.red('No es un archivo Mardown'));
@@ -113,6 +111,7 @@ const counterLink = (array) => {
       linkNotOk += 1;
     }
   });
+
   console.log('▸Total de links: ', array.length);
   console.log(colors.green('▸Links OK ✅:'), colors.white(`${linkOk}`));
   console.log(colors.red('▸Links FAIL ❌:'), colors.white(`${linkNotOk}`));

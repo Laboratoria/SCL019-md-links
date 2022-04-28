@@ -1,7 +1,9 @@
 const app = require('../app.js');
 const index = require ('../index.js');
+const prompt = require('prompt-sync');
 const directory = './';
 const documentMd = './readme2.md'; 
+jest.mock('prompt-sync', );
 const documentErr = './text.tx';
 const extension = './README.md';
 const arrayLink = [
@@ -74,7 +76,7 @@ describe ('La función validateLinks  retorna propiedades', () =>{
   test('Retorna array con los links del archivo', async() =>{
     expect(await app.validateLinks(linkOk)).toStrictEqual(validateLinkOk);
   })
-  test('Retorna array con los links del archivo', async() =>{
+  test('Retorna array con los links rotos del archivo', async() =>{
     expect(await app.validateLinks(linkFail)).toStrictEqual(validateLinkFail);
   })
 
@@ -87,8 +89,20 @@ describe ('La función mdLinks retorna data y estatus de los links', () =>{
   test('Retorna array con la validaciíon de los links y propiedades', async() =>{
     expect(await index.mdLinks(documentMd,'--validate')).toStrictEqual(resolveMdlinks);
   })
-  test('Retorna un contador con links ', async() =>{
-    expect(await app.validateLinks(directory,'--validate')).toStrictEqual(['readme2.md']);
+  test('Retorna array con los nombres de los archivos con extension .md', async() =>{
+    expect(await index.mdLinks(directory,'--validate')).toStrictEqual('readme2.md');
   })
+})
+
+describe ('La función counterLink retorna valores numericos ', () =>{
+  it('Validamos de que es una función.', () => {   ///ok!!
+    expect(typeof app.counterLink).toBe('function');
+  });
+  // it('Retorna la cantidad de links que estan funcionando', () =>{
+  //   expect(app.counterLink(linkOk)).toStrictEqual('5');
+  // })
+  // test('Retorna array con los links rotos del archivo', async() =>{
+  //   expect(await app.validateLinks(linkFail)).toStrictEqual(validateLinkFail);
+  // })
 
 })

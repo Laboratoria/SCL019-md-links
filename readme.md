@@ -9,13 +9,13 @@
 ***
 
 ## 1. Sobre el módulo
-md-links-danielaAlcala es una aplicación que permite verificar el estado de los links contenidos en archivos md de manera fácil y rápida, con la opción de ver stats básicas como el total de links encontrados, links funcionales y links rotos, además de poder desplegar una lista completa de links que indica de forma gráfica y sencilla el estado de cada uno.
+md-links-alcala es una aplicación que permite verificar el estado de los links contenidos en archivos md de manera fácil y rápida, con la opción de ver stats básicas como el total de links encontrados, links funcionales y links rotos, además de poder desplegar una lista completa de links que indica de forma gráfica y sencilla el estado de cada uno.
 
 
 ## 2. Instalación
 Para instalar, sólo debes ejecutar el siguiente comando en tu terminal:
 
-`npm install md-links-danielaAlcala`
+`npm install md-links-alcala`
 
 ## 3. Cómo usar
 Una vez instalada, puedes llamar a la aplicación como 'mdlinks', agregando la ruta del archivo o directorio a revisar y especificando si quieres ver --stats, --validate o ambos.
